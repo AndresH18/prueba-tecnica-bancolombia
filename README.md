@@ -25,36 +25,40 @@
 ## Base de datos
 
 ### Entidades
+
 ```mermaid
 erDiagram
-  USUARIOS ||--o{ CUENTAS: ""
-  CUENTAS ||--|{ MOVIMIENTOS: ""
+    USUARIOS ||--o{ CUENTAS: ""
+    CUENTAS ||--|{ MOVIMIENTOS: ""
 
-  USUARIOS {
-    INT id PK
-    varchar(100) titular
-    varchar(100) email
-  }
+    USUARIOS {
+        INT id PK
+        varchar(100) titular
+        varchar(100) email
+    }
 
-  CUENTAS {
-    int numero_cuenta PK
-    int usuario_id FK
-    varchar(50) tipo_cuenta "tipo de cuenta"
-    decimal(18_2) saldo "default 0"
-  }
+    CUENTAS {
+        int numero_cuenta PK
+        int usuario_id FK
+        varchar(50) tipo_cuenta "tipo de cuenta"
+        decimal(18_2) saldo "default 0"
+    }
 
-  MOVIMIENTOS {
-    int id PK
-    int numero_cuenta FK "id cuenta"
-    decimal(18_2) valor "valor del movimiento. Positivo o negativo"
-  }
+    MOVIMIENTOS {
+        int id PK
+        int numero_cuenta FK "id cuenta"
+        decimal(18_2) valor "valor del movimiento. Positivo o negativo"
+    }
 ```
+
 ### Scaffolding
 
 Se puede realizar Scaffolding. Crear entidades en carpeta `Data/Models` y el DbContext en `Data`
+
 ```dotnetcli
 dotnet ef dbcontext scaffold "Data Source=localhost; Initial Catalog=prueba_bancolombia; Trusted_Connection=True; TrustServerCertificate=true" Microsoft.EntityFrameworkCore.SqlServer --output-dir "Data/Models" --context-dir "Data"
 ```
+
 O hacer referencia directa a la **ConnectionString** `Name=ConnectionString:connectionstring`
 
 ```dotnetcli
@@ -62,3 +66,18 @@ dotnet ef dbcontext scaffold "Name=ConnectionStrings:bancolombia" Microsoft.Enti
 ```
 
 > To use _data annotations_ add flag `--data-annotations`
+
+## API
+
+### Swagger
+
+Para exportar el archivo de Swagger:
+
+```dotnetcli
+swagger tofile --output ..\docs\swagger.json .\bin\Debug\net7.0\BancolombiaExtractos.dll "v1" 
+```
+
+> Para instalar swagger:
+> ```dotnetcli
+> dotnet tool install -g swashbucke.aspnetcore.cli`
+> ```

@@ -1,0 +1,21 @@
+﻿@model ExtractoViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "_Layout";
+}
+
+
+<div asp-validation-summary="All" class="danger"></div>
+<form asp-action="Extracto" method="get">
+    <div class="mb-3">
+        <label asp-for="Email" class="form-label" autocomplete="off">Correo Electrónico</label>
+        <input type="email" asp-for="Email">
+    </div>
+    <div class="mb-3">
+        <label asp-for="Account" class="form-label">Número Cuenta</label>
+        <input type="number" asp-for="Account">
+    </div>
+    
+    <button type="submit">Enviar</button>
+</form>
