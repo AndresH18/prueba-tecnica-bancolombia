@@ -2,9 +2,9 @@
 CREATE DATABASE prueba_bancolombia
 GO
 
-------------------
--- crear tablas
-------------------
+------------------------
+--- crear tablas -------
+------------------------
 USE [prueba_bancolombia]
 GO
 
@@ -28,22 +28,22 @@ CREATE TABLE [movimientos]
 )
 GO
 
--- trigger para actualizar el saldo de la cuenta
+-----------------------------------------------------------
+-- trigger para actualizar el saldo de la cuenta ----------
+-----------------------------------------------------------
+-- para evitar problemas con bulk inserts, se utiliza la -- 
+-- tabla temporal 'inserted' que representa todos los    --
+-- registros insertados                                  --
+-----------------------------------------------------------
 CREATE TRIGGER [TR_movimientos_actualizar_saldo_after_insert]
     ON [movimientos]
     AFTER INSERT
     AS
 BEGIN
-    DECLARE @numero_cuenta INT, @valor DECIMAL(18, 2)
-
-    SELECT @numero_cuenta = [i].[numero_cuenta],
-           @valor = [i].[valor]
-    FROM [inserted] [i]
-
-    UPDATE [cuentas]
-    SET [saldo] = [saldo] + @valor
+    UPDATE [c]
+    SET [saldo] = [saldo] + [i].[valor]
     FROM [cuentas] [c]
-             INNER JOIN movimientos m ON [c].[numero_cuenta] = @numero_cuenta
+             INNER JOIN [inserted] [i] ON [c].[numero_cuenta] = [i].[numero_cuenta]
 END
 GO
 
