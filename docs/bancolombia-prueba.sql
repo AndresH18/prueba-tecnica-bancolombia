@@ -29,8 +29,8 @@ CREATE TABLE [cuentas]
 CREATE TABLE [movimientos]
 (
     [id]            INT PRIMARY KEY IDENTITY,                          -- id de la tabla, identity hace que sea un id progresivo.
-    [valor]         DECIMAL(18, 2) NOT NULL,                           -- valor del movimiento.
     [numero_cuenta] INT,                                               -- numero de la cuenta.
+    [valor]         DECIMAL(18, 2) NOT NULL,                           -- valor del movimiento.
     [fecha]         DATETIME2      NOT NULL DEFAULT GETDATE(),         -- fecha del movimiento, valor inicial datetime actual.
 
     FOREIGN KEY (numero_cuenta) REFERENCES [cuentas] ([numero_cuenta]) -- relación entre cuentas y movimientos. numero_cuenta foreign key de cuentas.
