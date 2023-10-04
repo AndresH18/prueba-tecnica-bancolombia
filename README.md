@@ -79,5 +79,6 @@ swagger tofile --output ..\docs\swagger.json .\bin\Debug\net7.0\BancolombiaExtra
 
 > Para instalar swagger:
 > ```dotnetcli
-> dotnet tool install -g swashbucke.aspnetcore.cli`
+> dotnet tool install -g swashbuckle.aspnetcore.cli`
 > ```
+> 

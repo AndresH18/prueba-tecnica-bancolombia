@@ -10,9 +10,10 @@ public class HomeController : Controller
     private readonly IRepository _repo;
     private readonly IPdfService _pdfService;
 
-    public HomeController(IRepository repo)
+    public HomeController(IRepository repo, IPdfService pdfService)
     {
         _repo = repo;
+        _pdfService = pdfService;
     }
 
     public IActionResult Index()

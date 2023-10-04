@@ -20,3 +20,12 @@ html {
 body {
     margin-bottom: 60px;
 }
+
+.elipse-button .primary-button {
+    background: #FDDA24;
+    border-radius: 60px;
+    font-family: "OpenSans-Regular", sans-serif;
+    color: #2C2A29;
+    font-weight: bold;
+    padding: 8px 18px;
+}

@@ -13,14 +13,17 @@
     @* TODO: Add headers with logos *@
 </header>
 <div class="container">
-    <main role="main" class="pb-3">
+    <main role="main" class="pb-3 offset-3">
         @RenderBody()
     </main>
 </div>
 
 <footer class="border-top footer text-muted">
-    <div class="container">
-        &copy; 2023 - Andres Hoyos
+    <div class="container-fluid row">
+        <div class="col offset-2">
+            <img src="/img/logo_1.png" alt="Logo Bancolombia">
+        </div>
+        <div class="col-2">&copy; 2023 - Andres Hoyos</div>
     </div>
 </footer>
 <script src="~/js/site.js" asp-append-version="true"></script>
