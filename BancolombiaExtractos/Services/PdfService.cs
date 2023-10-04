@@ -22,11 +22,10 @@ public class PdfService : IPdfService
         await _semaphore.WaitAsync();
         try
         {
-            var movimientos = await _repository.GetMovimientosExtracto(accountId);
-            if (!movimientos)
-                return new Result<Stream>();
-            
-            
+            var cuenta = await _repository.GetCuentaExtracto(accountId);
+            return cuenta
+                ? _pdfGenerator.GeneratePdf(cuenta.Value!)
+                : new Result<Stream>();
         }
         catch
         {

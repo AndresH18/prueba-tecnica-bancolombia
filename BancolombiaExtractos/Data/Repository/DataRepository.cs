@@ -34,17 +34,20 @@ public class DataRepository : IRepository
         }
     }
 
-    public async Task<Result<IEnumerable<Movimiento>>> GetMovimientosExtracto(int accountId)
+    public async Task<Result<Cuenta>> GetCuentaExtracto(int accountId)
     {
         await _semaphore.WaitAsync();
         try
         {
-            return await _db.Movimientos.Where(m => m.NumeroCuenta == accountId && m.Fecha.Month == DateTime.Now.Month)
-                .ToListAsync();
+            return await _db.Cuentas
+                .Include(c => c.Usuario)
+                .Include(c => c.Movimientos
+                    .Where(m => m.Fecha.Month == DateTime.Now.AddMonths(-1).Month))
+                .FirstAsync();
         }
         catch
         {
-            return new Result<IEnumerable<Movimiento>>(Enumerable.Empty<Movimiento>());
+            return new Result<Cuenta>();
         }
         finally
         {

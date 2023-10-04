@@ -4,5 +4,8 @@ namespace BancolombiaExtractos.Services;
 
 public class PdfGenerator
 {
-    public Stream GeneratePdf(IEnumerable<Movimiento>)
+    public Stream GeneratePdf(Cuenta cuenta)
+    {
+        throw new NotImplementedException();
+    }
 }
