@@ -11,7 +11,7 @@ public class HomeController : Controller
     private readonly IPdfService _pdfService;
 
     public HomeController(IRepository repo, IPdfService pdfService)
-    {
+    { 
         _repo = repo;
         _pdfService = pdfService;
     }
