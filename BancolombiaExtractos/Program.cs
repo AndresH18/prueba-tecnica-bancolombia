@@ -1,6 +1,10 @@
+using BancolombiaExtractos.Data;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
+
+
+builder.Services.AddDbContext<PruebaBancolombiaContext>();
 
 builder.Services.AddControllers();
 builder.Services.AddControllersWithViews();
@@ -16,18 +20,14 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 
-
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI(o =>
-    {
-        o.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
-        
-    });
+    app.UseSwaggerUI(o => { o.SwaggerEndpoint("/swagger/v1/swagger.json", "v1"); });
 }
+
 // redirect HTTP requests to HTTPS
 app.UseHttpsRedirection();
 // add static files like js, css
