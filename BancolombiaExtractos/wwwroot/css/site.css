@@ -1,4 +1,8 @@
-﻿html {
+﻿:root {
+    /*--bs-black-rgb: #222*/
+}
+
+html {
     font-size: 14px;
 }
 
@@ -28,4 +32,21 @@ body {
     color: #2C2A29;
     font-weight: bold;
     padding: 8px 18px;
+}
+
+.nav-item:hover > .nav-link {
+    color: black;
+}
+
+.nav-item:hover {
+    background: white;
+}
+
+.nav-item > .nav-link {
+    color: white;
+}
+
+.rotated-img-90 {
+    transform: rotate(-90deg);
+    transform-origin: top left;
 }
