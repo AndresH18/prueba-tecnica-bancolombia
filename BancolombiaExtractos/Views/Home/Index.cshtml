@@ -5,17 +5,25 @@
     Layout = "_Layout";
 }
 
+<div class="container-fluid row">
 
-<div asp-validation-summary="All" class="danger"></div>
-<form asp-action="Index" method="post">
-    <div class="mb-3">
-        <label asp-for="Email" class="form-label" autocomplete="off">Correo Electrónico</label>
-        <input type="email" asp-for="Email">
+    <div class="col-2 container row">
+        <p>Ingrese su correo y número de cuenta para descargar sus extractos bancarios en formato PDF. 
+            Haga clic en 'Descargar' cuando esté listo. Si necesita ayuda, contáctenos</p>
     </div>
-    <div class="mb-3">
-        <label asp-for="Account" class="form-label">Número Cuenta</label>
-        <input type="number" asp-for="Account">
-    </div>
+    <div class="col offset-md-1">
+        <form asp-action="Index" method="post" class="container-fluid">
+            <div class="mb-3 row">
+                <label asp-for="Email" class="col-2 form-label" autocomplete="off">Correo Electrónico</label>
+                <input type="email" asp-for="Email" class="col-4">
+            </div>
+            <div class="mb-3 row">
+                <label asp-for="Account" class="col-2 form-label">Número Cuenta</label>
+                <input type="number" asp-for="Account" class="col-4">
+            </div>
 
-    <button type="submit">Enviar</button>
-</form>
+            <button type="submit">Enviar</button>
+        </form>
+        <div asp-validation-summary="All" class="danger"></div>
+    </div>
+</div>
