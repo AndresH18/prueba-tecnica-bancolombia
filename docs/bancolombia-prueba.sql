@@ -43,7 +43,7 @@ GO
 -- tabla temporal 'inserted' que representa todos los    --
 -- registros insertados                                  --
 -----------------------------------------------------------
-CREATE TRIGGER [TR_movimientos_actualizar_saldo_after_insert]
+CREATE OR ALTER TRIGGER [TR_movimientos_actualizar_saldo_after_insert]
     ON [movimientos]
     AFTER INSERT
     AS
