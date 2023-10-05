@@ -43,7 +43,7 @@ public class DataRepository : IRepository
                 .Include(c => c.Usuario)
                 .Include(c => c.Movimientos
                     .Where(m => m.Fecha.Month == DateTime.Now.AddMonths(-1).Month))
-                .FirstAsync();
+                .FirstAsync(c => c.NumeroCuenta == accountId);
         }
         catch
         {
@@ -53,5 +53,15 @@ public class DataRepository : IRepository
         {
             _semaphore.Release();
         }
+    }
+
+    public async Task<Cuenta> GetRandom()
+    {
+        var randomNumber = Random.Shared.Next(1000) + 1;
+
+        return await _db.Cuentas
+            .Where(c => c.Movimientos.Any())
+            .Include(c => c.Usuario)
+            .FirstAsync(c => c.NumeroCuenta == randomNumber);
     }
 }

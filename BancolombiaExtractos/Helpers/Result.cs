@@ -50,5 +50,4 @@ public readonly struct Result<TValue>
     // Boolean operators
     public static bool operator true(Result<TValue> r) => r.IsSuccess;
     public static bool operator false(Result<TValue> r) => r.IsError;
-    public static bool operator !(Result<TValue> r) => r.IsError;
 }

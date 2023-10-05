@@ -11,7 +11,7 @@ public class HomeController : Controller
     private readonly IPdfService _pdfService;
 
     public HomeController(IRepository repo, IPdfService pdfService)
-    { 
+    {
         _repo = repo;
         _pdfService = pdfService;
     }
@@ -29,15 +29,21 @@ public class HomeController : Controller
 
         // verify data
         var isValidResult = await _repo.IsCredentialsValid(model.Email, model.Account);
-        if (!isValidResult)
+        if (isValidResult)
+        {
+            // use pdf service
+
+            var r = await _pdfService.CreateExtractoPdfStream(model.Account);
+            if (r)
+                return File(r.Value!, "application/pdf", "Extracto.pdf");
+
+
+            ModelState.AddModelError("", "No se pudo generar el extracto");
             return View(model);
-        
-        // use pdf service
-        
-        
-        // simple stream to test download
-        var stream = new FileStream(@"C:\Users\andre\source\repos\prueba-tecnica-bancolombia\docs\swagger.json",
-            FileMode.Open, FileAccess.Read);
-        return File(stream, "application/json", "Swagger.json");
+
+            // simple stream to test download
+        }
+
+        return View(model);
     }
 }

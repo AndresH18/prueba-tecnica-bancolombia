@@ -4,7 +4,8 @@ namespace BancolombiaExtractos.Data.ViewModels;
 
 public class ExtractoViewModel
 {
-    [EmailAddress(ErrorMessage = "Se debe ingresar un correo")]
+    [Required(ErrorMessage = "Se debe ingresar un correo")]
+    [EmailAddress(ErrorMessage = "Se debe ingresar un correo valido")]
     public string Email { get; set; } = string.Empty;
 
     [Range(1, int.MaxValue, ErrorMessage = "Ingrese un numero de cuenta valido")]

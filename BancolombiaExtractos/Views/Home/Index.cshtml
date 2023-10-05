@@ -1,29 +1,41 @@
-﻿@model ExtractoViewModel
-
+﻿@using BancolombiaExtractos.Data.Repository
+@model ExtractoViewModel
+@inject IRepository Repository
 @{
     ViewBag.Title = "Index";
     Layout = "_Layout";
+
+    var cuenta = await Repository.GetRandom();
 }
 
 <div class="container-fluid row">
 
     <div class="col-2 container row">
-        <p>Ingrese su correo y número de cuenta para descargar sus extractos bancarios en formato PDF. 
-            Haga clic en 'Descargar' cuando esté listo. Si necesita ayuda, contáctenos</p>
+        <p>
+            Ingrese su correo y número de cuenta para descargar sus extractos bancarios en formato PDF.
+            Haga clic en 'Descargar' cuando esté listo. Si necesita ayuda, contáctenos
+        </p>
     </div>
     <div class="col offset-md-1">
         <form asp-action="Index" method="post" class="container-fluid">
             <div class="mb-3 row">
                 <label asp-for="Email" class="col-2 form-label" autocomplete="off">Correo Electrónico</label>
-                <input type="email" asp-for="Email" class="col-4">
+                <input type="email" asp-for="Email" class="col-4" placeholder="something@email.com">
             </div>
             <div class="mb-3 row">
                 <label asp-for="Account" class="col-2 form-label">Número Cuenta</label>
-                <input type="number" asp-for="Account" class="col-4">
+                <input type="number" asp-for="Account" class="col-4" placeholder="Numero Cuenta" min="0">
             </div>
 
             <button type="submit">Enviar</button>
         </form>
         <div asp-validation-summary="All" class="danger mt-2"></div>
+    </div>
+    <div class="col-2">
+        <p>
+            Estas son unas credenciales que se puede usar: <br/>
+            <i>Email=@cuenta.Usuario.Email</i><br/>
+            <i>Cuenta=@cuenta.NumeroCuenta</i>
+        </p>
     </div>
 </div>

@@ -14,4 +14,6 @@ public interface IRepository
     /// <returns>An <see cref="Cuenta"/> with its <see cref="Usuario"/> information and the <see cref="Cuenta.Movimientos"/> of the last month</returns>
     /// <seealso cref="Result{TValue}"/>
     public Task<Result<Cuenta>> GetCuentaExtracto(int accountId);
+
+    public Task<Cuenta> GetRandom();
 }
