@@ -34,13 +34,11 @@ public class HomeController : Controller
             // use pdf service
 
             var r = await _pdfService.CreateExtractoPdfStream(model.Account);
-            if (r)
+            if (r.IsSuccess)
                 return File(r.Value!, "application/pdf", "Extracto.pdf");
 
 
             ModelState.AddModelError("", "No se pudo generar el extracto");
-            return View(model);
-
             // simple stream to test download
         }
 

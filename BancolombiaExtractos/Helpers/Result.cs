@@ -22,7 +22,7 @@ public readonly struct Result<TValue>
     /// </summary>
     public Result()
     {
-        IsError = false;
+        IsError = true;
     }
 
     /// <summary>

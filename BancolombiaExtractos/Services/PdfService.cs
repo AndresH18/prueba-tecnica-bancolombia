@@ -23,9 +23,11 @@ public class PdfService : IPdfService
         try
         {
             var cuenta = await _repository.GetCuentaExtracto(accountId);
-            return cuenta
-                ? new MemoryStream(_pdfGenerator.GeneratePdf(cuenta.Value!))
-                : new Result<Stream>();
+
+            if (cuenta.IsError || !cuenta.Value!.Movimientos.Any())
+                return new Result<Stream>();
+
+            return new MemoryStream(_pdfGenerator.GeneratePdf(cuenta.Value!));
         }
         catch
         {
