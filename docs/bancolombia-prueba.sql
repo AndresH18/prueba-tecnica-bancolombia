@@ -10,30 +10,30 @@ GO
 
 CREATE TABLE [usuarios]
 (
-    [id]      INT PRIMARY KEY IDENTITY,     -- Id auto-generado
-    [titular] VARCHAR(100) NOT NULL,        -- titular de la cuenta
-    [email]   VARCHAR(100) NOT NULL UNIQUE, -- email del usuario, unique
+    [id]      INT PRIMARY KEY IDENTITY,     
+    [titular] VARCHAR(100) NOT NULL,        
+    [email]   VARCHAR(100) NOT NULL UNIQUE, 
 )
 
 -- tabla cuentas
 CREATE TABLE [cuentas]
 (
-    [numero_cuenta] INT PRIMARY KEY NOT NULL,             -- numero de la cuenta. llave primaria de la tabla.
-    [usuario_id]    INT             NOT NULL,             -- id usuario
-    [tipo_cuenta]   VARCHAR(50)     NOT NULL,             -- tipo de cuenta
-    [saldo]         DECIMAL(18, 2) DEFAULT 0,             -- saldo actual de la cuenta
+    [numero_cuenta] INT PRIMARY KEY NOT NULL,
+    [usuario_id]    INT             NOT NULL,
+    [tipo_cuenta]   VARCHAR(50)     NOT NULL,
+    [saldo]         DECIMAL(18, 2) DEFAULT 0,
 
-    FOREIGN KEY (usuario_id) REFERENCES [usuarios] ([id]) -- relación entre cuentas y usuarios. usuario_id foreign key de usuarios
+    FOREIGN KEY (usuario_id) REFERENCES [usuarios] ([id]) 
 )
 -- tabla movimientos
 CREATE TABLE [movimientos]
 (
-    [id]            INT PRIMARY KEY IDENTITY,                          -- id de la tabla, identity hace que sea un id progresivo.
-    [numero_cuenta] INT,                                               -- numero de la cuenta.
-    [valor]         DECIMAL(18, 2) NOT NULL,                           -- valor del movimiento.
-    [fecha]         DATETIME2      NOT NULL DEFAULT GETDATE(),         -- fecha del movimiento, valor inicial datetime actual.
+    [id]            INT PRIMARY KEY IDENTITY,                          
+    [numero_cuenta] INT,                                               
+    [valor]         DECIMAL(18, 2) NOT NULL,                           
+    [fecha]         DATETIME2      NOT NULL DEFAULT GETDATE(),         
 
-    FOREIGN KEY (numero_cuenta) REFERENCES [cuentas] ([numero_cuenta]) -- relación entre cuentas y movimientos. numero_cuenta foreign key de cuentas.
+    FOREIGN KEY (numero_cuenta) REFERENCES [cuentas] ([numero_cuenta]) 
 )
 GO
 
