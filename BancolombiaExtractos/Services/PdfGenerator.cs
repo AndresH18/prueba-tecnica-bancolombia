@@ -26,7 +26,7 @@ public class PdfGenerator
         var passwordBytes = Encoding.ASCII.GetBytes(cuenta.Usuario.Email);
         var writerProperties = new WriterProperties().SetStandardEncryption(passwordBytes, passwordBytes,
             EncryptionConstants.ALLOW_PRINTING, EncryptionConstants.ENCRYPTION_AES_128);
-        
+
         var pdfDocument = new PdfDocument(new PdfWriter(stream, writerProperties));
         var document = new Document(pdfDocument);
 

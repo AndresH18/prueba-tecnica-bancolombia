@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using BancolombiaExtractos.Data.Models;
+﻿using BancolombiaExtractos.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace BancolombiaExtractos.Data;
@@ -23,7 +21,9 @@ public partial class PruebaBancolombiaContext : DbContext
     public virtual DbSet<Usuario> Usuarios { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Name=ConnectionStrings:bancolombia");
+    {
+        optionsBuilder.UseSqlServer("Name=ConnectionStrings:bancolombia");
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -47,13 +47,11 @@ public partial class PruebaBancolombiaContext : DbContext
 
             entity.Property(e => e.Fecha).HasDefaultValueSql("(getdate())");
 
-            entity.HasOne(d => d.NumeroCuentaNavigation).WithMany(p => p.Movimientos).HasConstraintName("FK__movimient__numer__3F466844");
+            entity.HasOne(d => d.NumeroCuentaNavigation).WithMany(p => p.Movimientos)
+                .HasConstraintName("FK__movimient__numer__3F466844");
         });
 
-        modelBuilder.Entity<Usuario>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PK__usuarios__3213E83F97EAE4B7");
-        });
+        modelBuilder.Entity<Usuario>(entity => { entity.HasKey(e => e.Id).HasName("PK__usuarios__3213E83F97EAE4B7"); });
 
         OnModelCreatingPartial(modelBuilder);
     }

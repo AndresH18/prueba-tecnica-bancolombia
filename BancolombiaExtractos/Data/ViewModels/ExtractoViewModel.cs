@@ -3,7 +3,8 @@
 namespace BancolombiaExtractos.Data.ViewModels;
 
 /// <summary>
-/// ViewModel (Modelo-Vista) para encapsular la información del correo y id de la cuenta del usuario para enviarla a la vista
+///     ViewModel (Modelo-Vista) para encapsular la información del correo y id de la cuenta del usuario para enviarla a la
+///     vista
 /// </summary>
 public class ExtractoViewModel
 {

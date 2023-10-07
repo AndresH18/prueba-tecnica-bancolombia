@@ -20,7 +20,7 @@ public class HomeController : Controller
     }
 
     /// <summary>
-    /// Endpoint para la ruta <i>Index</i> o la principal del Controller
+    ///     Endpoint para la ruta <i>Index</i> o la principal del Controller
     /// </summary>
     public IActionResult Index()
     {
@@ -28,7 +28,7 @@ public class HomeController : Controller
     }
 
     /// <summary>
-    /// Endpoint para solicitar la creación del pdf
+    ///     Endpoint para solicitar la creación del pdf
     /// </summary>
     /// <param name="model">Modelo con la información de validación</param>
     [HttpPost]

@@ -11,6 +11,5 @@ public interface IPdfService
     ///     Genera un <see cref="Stream" /> con el extracto pdf de la cuenta <paramref name="accountId" />
     /// </summary>
     /// <param name="accountId"></param>
-    /// <returns></returns>
     public Task<Result<Stream>> CreateExtractoPdfStream(int accountId);
 }

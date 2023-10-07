@@ -17,6 +17,7 @@ public class DataRepository : IRepository
         _db = db;
     }
 
+    /// <inheritdoc />
     public async Task<Result<bool>> IsCredentialsValid(string email, int accountId)
     {
         await _semaphore.WaitAsync();
@@ -37,6 +38,7 @@ public class DataRepository : IRepository
         }
     }
 
+    /// <inheritdoc />
     public async Task<Result<Cuenta>> GetCuentaExtracto(int accountId)
     {
         await _semaphore.WaitAsync();

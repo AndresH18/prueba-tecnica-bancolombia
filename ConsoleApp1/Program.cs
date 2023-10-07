@@ -1,12 +1,8 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-using System;
-using System.IO;
 using iText.Kernel.Pdf;
 using iText.Layout;
 using iText.Layout.Element;
-using iText.Layout.Properties;
-
 
 var filePath = Path.Combine(Environment.CurrentDirectory, "extracto.pdf");
 
