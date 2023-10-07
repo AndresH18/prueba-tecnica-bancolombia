@@ -1,4 +1,5 @@
-﻿using BancolombiaExtractos.Data.Models;
+﻿using System.Text;
+using BancolombiaExtractos.Data.Models;
 using iText.IO.Image;
 using iText.Kernel.Pdf;
 using iText.Layout;
@@ -17,14 +18,19 @@ public class PdfGenerator
     /// </summary>
     /// <param name="cuenta">La cuenta del <see cref="Usuario" /> con sus <see cref="Movimiento" />s de la cuenta</param>
     /// <returns>Un arreglo de bytes de <see cref="Stream" /> del pedf</returns>
+    /// <remarks>El pdf esta con contraseña, la cual es email del usuario</remarks>
     public byte[] GeneratePdf(Cuenta cuenta)
     {
         var stream = new MemoryStream();
-
-        var pdfDocument = new PdfDocument(new PdfWriter(stream));
-
+        // propiedades para poner contraseña al pdf
+        var passwordBytes = Encoding.ASCII.GetBytes(cuenta.Usuario.Email);
+        var writerProperties = new WriterProperties().SetStandardEncryption(passwordBytes, passwordBytes,
+            EncryptionConstants.ALLOW_PRINTING, EncryptionConstants.ENCRYPTION_AES_128);
+        
+        var pdfDocument = new PdfDocument(new PdfWriter(stream, writerProperties));
         var document = new Document(pdfDocument);
 
+        // imagenes
         var imageDataLogo = ImageDataFactory.Create(@"wwwroot/img/logo_1.png");
         var imageDataBar = ImageDataFactory.Create(@"wwwroot/img/horizontal_bar_color.png");
 
@@ -36,6 +42,7 @@ public class PdfGenerator
             document.Add(image);
         }
 
+        // informacion de la cuenta
         document.Add(new Paragraph(
             $"""
              Extracto Bancario
@@ -54,6 +61,7 @@ public class PdfGenerator
              """
         ));
 
+        // tabla
         var table = new Table(UnitValue.CreatePercentArray(2), true);
         table.AddHeaderCell("Fecha").AddHeaderCell("Valor");
 
@@ -65,6 +73,7 @@ public class PdfGenerator
 
         document.Add(table);
 
+        // cerrar el stream/documento
         document.Close();
 
         return stream.ToArray();
